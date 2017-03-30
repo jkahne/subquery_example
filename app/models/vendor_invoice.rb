@@ -5,6 +5,7 @@ class VendorInvoice < ApplicationRecord
 
 
   def self.doit
+    #subqueries
     payments = VendorPayment.select("vendor_invoice_id, sum(amount_cents) as total").group(:vendor_invoice_id)
     line_items = BillLineItem.select("vendor_invoice_id, sum(amount_cents) as total").group(:vendor_invoice_id)
     
